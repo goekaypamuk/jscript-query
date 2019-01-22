@@ -4,7 +4,7 @@ Javascrpt Query library for JSON data sets
 
 ## Installation
 ```bash
-$ npm install ... -save
+$ npm i jscript-query --save
 ```
 ### Usage 
 ## NodeJs
