@@ -1,8 +1,8 @@
 {
   "name": "jscript-query",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "javascript sql like query library",
-  "main": "dist/js-query.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
