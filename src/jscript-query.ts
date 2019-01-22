@@ -1,4 +1,4 @@
-export class JsQuery<T> {
+export class JscriptQuery<T> {
     private collection: Array<any>;
     constructor(collection: Array<T>) {
         this.collection = collection.concat([]);

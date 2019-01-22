@@ -1,8 +1,8 @@
 {
-  "name": "jsquery",
+  "name": "jscript-query",
   "version": "1.0.0",
   "description": "javascript sql like query library",
-  "main": "index.js",
+  "main": "dist/js-query.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,10 @@
     "json",
     "array"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goekaypamuk/jscript-query"
+  },
   "author": "gökay pamuk",
-  "license": "ISC"
+  "license": "MIT"
 }
