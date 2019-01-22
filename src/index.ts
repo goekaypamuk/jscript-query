@@ -1,9 +1,9 @@
-export class JsQuery {
+export class JsQuery<T> {
     private collection: Array<any>;
-    constructor(collection: Array<any>) {
-        this.collection = collection;
+    constructor(collection: Array<T>) {
+        this.collection = collection.concat([]);
     }
-    sum(sumFields: Array<string>, groupBy: Array<string>) {
+    sum(sumFields: Array<string>, groupBy: Array<string> = []) {
         const groupByMap: any = {};
         const result: Array<any> = [];
         this.collection.forEach((row: any) => {
@@ -31,7 +31,7 @@ export class JsQuery {
         return this;
     }
 
-    avg(sumFields: Array<string>, groupBy: Array<string>) {
+    avg(sumFields: Array<string>, groupBy: Array<string> = []) {
         const groupByMap: any = {};
         const result: Array<any> = [];
         this.collection.forEach((row: any) => {
@@ -55,7 +55,6 @@ export class JsQuery {
                 result[groupByMap[currentGroupBy]][ok] = row[ok] + result[groupByMap[currentGroupBy]][ok];
                 if (row[ok] !== null) result[groupByMap[currentGroupBy]][ok + '____ccc'] ++;
             });
-
         });
         result.forEach((row: any) =>  {
             sumFields.forEach((ok: any) => {
@@ -67,12 +66,34 @@ export class JsQuery {
         return this;
     }
 
+    count(groupBy: Array<string> = [], countField: string = 'count') {
+        const groupByMap: any = {};
+        const result: Array<any> = [];
+        this.collection.forEach((row: any) => {
+            let currentGroupBy: any = 'g';
+            groupBy.forEach((gb: any) => {
+                currentGroupBy += '-' + row[gb];
+            });
+            if (groupByMap[currentGroupBy] === undefined) {
+                groupByMap[currentGroupBy] = result.length;
+                let ob: any = {};
+                ob[countField] = 0;
+                groupBy.forEach((gb: any) => {
+                    ob[gb] = row[gb];
+                });
+                result.push(ob);
+            }
+            result[groupByMap[currentGroupBy]][countField]++;
+        });
+        this.collection = result;
+        return this;
+    }
+
     join(collection: Array<any>) {
         let leftKeys = Object.keys(this.collection[0]);
         let rightKeys = Object.keys(collection[0]);
         leftKeys = leftKeys.filter((value: any) => -1 !== rightKeys.indexOf(value));
         const leftJonMap: any = {};
-        console.log(leftKeys)
         collection.forEach((row: any) => {
             let currentKey: any = 'k-';
             leftKeys.forEach((key: string) => {
@@ -90,7 +111,7 @@ export class JsQuery {
                 currentKey += '|' + row[key];
             });
             leftJonMap[currentKey].forEach((rowMatch: any) => {
-                newResult.push(Object.assign({}, row, rowMatch));
+                newResult.push((<any>Object).assign({}, row, rowMatch));
             });
         });
         this.collection = newResult;
@@ -116,8 +137,21 @@ export class JsQuery {
         this.collection = this.collection.concat(collection);
     }
 
-    get() {
+    execute() {
         return this.collection.concat([]);
+    }
+
+    select(fields: Array<string>) {
+        const newResult: any = [];
+        this.collection.forEach((row: any) => {
+           const newRow: any = {};
+           for (let key in row) {
+               if (fields.indexOf(key) >= 0) newRow[key] = row[key];
+           }
+           newResult.push(newRow);
+        });
+        this.collection = newResult;
+        return this;
     }
 
     where(filter: Array<{field: string, operator: string, value: any}>) {

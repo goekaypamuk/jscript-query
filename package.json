@@ -1,14 +1,24 @@
 {
   "name": "jsquery",
   "version": "1.0.0",
-  "description": "javascript query library",
+  "description": "javascript sql like query library",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "javascript",
-    "query"
+    "query",
+    "sum",
+    "groupBy",
+    "join",
+    "aggregate",
+    "average",
+    "filter",
+    "where",
+    "sql",
+    "json",
+    "array"
   ],
   "author": "gökay pamuk",
   "license": "ISC"
