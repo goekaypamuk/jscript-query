@@ -1,6 +1,6 @@
 {
   "name": "jscript-query",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "javascript sql like query library",
   "main": "dist/index.js",
   "scripts": {

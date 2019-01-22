@@ -1,4 +1,4 @@
-export class Index<T> {
+export class JSscriptQuery<T> {
     private collection: Array<any>;
     constructor(collection: Array<T>) {
         this.collection = collection.concat([]);
